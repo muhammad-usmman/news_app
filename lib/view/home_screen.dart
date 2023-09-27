@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:news_app/models/news_channels_headlines_model.dart';
 import 'package:news_app/view_model/news_view_model.dart';
 
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   NewsViewModel newsViewModel = NewsViewModel();
+  final format = DateFormat('MMMM dd, yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: snapshot.data!.articles!.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
+                          DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
                           return SizedBox(
                             child: Stack(
                               alignment: Alignment.center,
@@ -81,7 +84,64 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
+                                Positioned(
+                                  bottom: 20,
+                                  child: Card(
+                                    elevation: 5,
+                                    color: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Container(
+                                      height: height*0.22,
+                                      alignment: Alignment.bottomCenter,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: width*0.7,
+                                            child: Text(snapshot.data!.articles![index].title.toString(),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.poppins(
+                                              fontSize: 17,
+
+                                              fontWeight: FontWeight.w700,
+                                            ),),
+                                          ),
+                                          Spacer(),
+                                          Container(
+                                            width: width*0.7,
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(snapshot.data!.articles![index].source!.name.toString(),
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 13,
+
+                                                    fontWeight: FontWeight.w600,
+                                                  ),),
+                                                Text(format.format(dateTime),
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 12,
+
+                                                    fontWeight: FontWeight.w500,
+                                                  ),),
+
+                                              ],
+                                            ),
+                                          ),
+
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           );
