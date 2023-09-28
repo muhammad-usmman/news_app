@@ -13,9 +13,14 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+enum FilterList { bbcNews, aryNews, independent, reuters, cnn, alJazeera }
+
 class _HomeScreenState extends State<HomeScreen> {
   NewsViewModel newsViewModel = NewsViewModel();
+
+  FilterList? selectedMenu;
   final format = DateFormat('MMMM dd, yyyy');
+  String name = 'bbc-news';
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {},
           icon: Image.asset(
             'images/category_icon.png',
-            height: 30,
-            width: 30,
+            height: 25,
+            width: 25,
           ),
         ),
         title: Text(
@@ -38,6 +43,66 @@ class _HomeScreenState extends State<HomeScreen> {
             fontWeight: FontWeight.w700,
           ),
         ),
+        actions: [
+          PopupMenuButton<FilterList>(
+            initialValue: selectedMenu,
+              icon: Icon(Icons.more_vert, color: Colors.black,),
+              onSelected: (FilterList item){
+
+
+              if(FilterList.bbcNews.name == item.name ){
+                name = 'bbc-news';
+              }
+              if(FilterList.aryNews.name == item.name ){
+                name = 'ary-news';
+              }
+              if(FilterList.independent.name == item.name ){
+                name = 'bbc-news';
+              }
+              if(FilterList.reuters.name == item.name ){
+                name = 'bbc-news';
+              }
+              if(FilterList.cnn.name == item.name ){
+                name = 'bbc-news';
+              }
+              if(FilterList.alJazeera.name == item.name ){
+                name = 'bbc-news';
+              }
+
+              setState(() {
+                selectedMenu =item;
+              });
+
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<FilterList>>[
+                    PopupMenuItem<FilterList>(
+                      value: FilterList.bbcNews,
+                      child: Text('BBC News'),
+
+                    ),
+                PopupMenuItem<FilterList>(
+                  value: FilterList.aryNews,
+                  child: Text('ARY News'),
+                ),
+                PopupMenuItem<FilterList>(
+                  value: FilterList.independent,
+                  child: Text('Independent'),
+                ),
+                PopupMenuItem<FilterList>(
+                  value: FilterList.reuters,
+                  child: Text('Reuters'),
+                ),
+                PopupMenuItem<FilterList>(
+                  value: FilterList.cnn,
+                  child: Text('CNN'),
+                ),
+                PopupMenuItem<FilterList>(
+                  value: FilterList.alJazeera,
+                  child: Text('Al-Jazeera'),
+                ),
+                  ]
+          )
+        ],
       ),
       body: ListView(
         children: [
@@ -48,8 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 future: newsViewModel.fetchNewsChannelsHeadlinesApi(),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return  Center(
-                      child:const SpinKitCircle(
+                    return Center(
+                      child: const SpinKitCircle(
                         size: 40,
                         color: Colors.blue,
                       ),
@@ -59,15 +124,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: snapshot.data!.articles!.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
+                          DateTime dateTime = DateTime.parse(snapshot
+                              .data!.articles![index].publishedAt
+                              .toString());
                           return SizedBox(
                             child: Stack(
                               alignment: Alignment.center,
                               children: [
                                 Container(
-                                  height : height *.6,
-                                  width: width*.9,
-                                  padding: EdgeInsets.symmetric(horizontal: height*.02),
+                                  height: height * .6,
+                                  width: width * .9,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: height * .02),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
                                     child: CachedNetworkImage(
@@ -78,7 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       placeholder: (context, url) => Container(
                                         child: spinkit2,
                                       ),
-                                      errorWidget: (context, url, error) => Icon(
+                                      errorWidget: (context, url, error) =>
+                                          Icon(
                                         Icons.error_outline,
                                         color: Colors.red,
                                       ),
@@ -94,49 +163,63 @@ class _HomeScreenState extends State<HomeScreen> {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Container(
-                                      height: height*0.22,
+                                      padding: EdgeInsets.all(15),
+                                      height: height * 0.22,
                                       alignment: Alignment.bottomCenter,
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            width: width*0.7,
-                                            child: Text(snapshot.data!.articles![index].title.toString(),
+                                            width: width * 0.7,
+                                            child: Text(
+                                              snapshot
+                                                  .data!.articles![index].title
+                                                  .toString(),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.poppins(
-                                              fontSize: 17,
-
-                                              fontWeight: FontWeight.w700,
-                                            ),),
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
                                           ),
                                           Spacer(),
                                           Container(
-                                            width: width*0.7,
+                                            width: width * 0.7,
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Text(snapshot.data!.articles![index].source!.name.toString(),
+                                                Text(
+                                                  snapshot
+                                                      .data!
+                                                      .articles![index]
+                                                      .source!
+                                                      .name
+                                                      .toString(),
                                                   maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 13,
-
                                                     fontWeight: FontWeight.w600,
-                                                  ),),
-                                                Text(format.format(dateTime),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  format.format(dateTime),
                                                   maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 12,
-
                                                     fontWeight: FontWeight.w500,
-                                                  ),),
-
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ),
-
                                         ],
                                       ),
                                     ),
