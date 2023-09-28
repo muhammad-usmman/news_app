@@ -56,22 +56,23 @@ class _HomeScreenState extends State<HomeScreen> {
               if(FilterList.aryNews.name == item.name ){
                 name = 'ary-news';
               }
-              if(FilterList.independent.name == item.name ){
-                name = 'bbc-news';
-              }
-              if(FilterList.reuters.name == item.name ){
-                name = 'bbc-news';
-              }
-              if(FilterList.cnn.name == item.name ){
-                name = 'bbc-news';
-              }
-              if(FilterList.alJazeera.name == item.name ){
-                name = 'bbc-news';
-              }
+              // if(FilterList.independent.name == item.name ){
+              //   name = 'bbc-news';
+              // }
+              // if(FilterList.reuters.name == item.name ){
+              //   name = 'bbc-news';
+              // }
+              // if(FilterList.cnn.name == item.name ){
+              //   name = 'bbc-news';
+              // }
+              // if(FilterList.alJazeera.name == item.name ){
+              //   name = 'bbc-news';
+              // }
 
               setState(() {
                 selectedMenu =item;
               });
+
 
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<FilterList>>[
@@ -84,22 +85,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   value: FilterList.aryNews,
                   child: Text('ARY News'),
                 ),
-                PopupMenuItem<FilterList>(
-                  value: FilterList.independent,
-                  child: Text('Independent'),
-                ),
-                PopupMenuItem<FilterList>(
-                  value: FilterList.reuters,
-                  child: Text('Reuters'),
-                ),
-                PopupMenuItem<FilterList>(
-                  value: FilterList.cnn,
-                  child: Text('CNN'),
-                ),
-                PopupMenuItem<FilterList>(
-                  value: FilterList.alJazeera,
-                  child: Text('Al-Jazeera'),
-                ),
+                // PopupMenuItem<FilterList>(
+                //   value: FilterList.independent,
+                //   child: Text('Independent'),
+                // ),
+                // PopupMenuItem<FilterList>(
+                //   value: FilterList.reuters,
+                //   child: Text('Reuters'),
+                // ),
+                // PopupMenuItem<FilterList>(
+                //   value: FilterList.cnn,
+                //   child: Text('CNN'),
+                // ),
+                // PopupMenuItem<FilterList>(
+                //   value: FilterList.alJazeera,
+                //   child: Text('Al-Jazeera'),
+                // ),
                   ]
           )
         ],
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: height * .55,
               width: width,
               child: FutureBuilder<NewsChannelsHeadlinesModel>(
-                future: newsViewModel.fetchNewsChannelsHeadlinesApi(),
+                future: newsViewModel.fetchNewsChannelsHeadlinesApi(name),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
