@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CategoriesScreen()));
+                MaterialPageRoute(builder: (context) => const CategoriesScreen()));
           },
           icon: Image.asset(
             'images/category_icon.png',
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           PopupMenuButton<FilterList>(
               initialValue: selectedMenu,
-              icon: Icon(
+              icon: const Icon(
                 Icons.more_vert,
                 color: Colors.black,
               ),
@@ -63,18 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (FilterList.aryNews.name == item.name) {
                   name = 'ary-news';
                 }
-                // if(FilterList.independent.name == item.name ){
-                //   name = 'bbc-news';
-                // }
-                // if(FilterList.reuters.name == item.name ){
-                //   name = 'bbc-news';
-                // }
-                // if(FilterList.cnn.name == item.name ){
-                //   name = 'bbc-news';
-                // }
-                // if(FilterList.alJazeera.name == item.name ){
-                //   name = 'bbc-news';
-                // }
+                if(FilterList.independent.name == item.name ){
+                  name = 'cbs-news';
+                }
+                if(FilterList.reuters.name == item.name ){
+                  name = 'reuters';
+                }
+                if(FilterList.cnn.name == item.name ){
+                  name = 'cnn';
+                }
+                if(FilterList.alJazeera.name == item.name ){
+                  name = 'al-jazeera-english';
+                }
 
                 setState(() {
                   selectedMenu = item;
@@ -82,30 +82,30 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               itemBuilder: (BuildContext context) =>
                   <PopupMenuEntry<FilterList>>[
-                    PopupMenuItem<FilterList>(
+                    const PopupMenuItem<FilterList>(
                       value: FilterList.bbcNews,
                       child: Text('BBC News'),
                     ),
-                    PopupMenuItem<FilterList>(
+                    const PopupMenuItem<FilterList>(
                       value: FilterList.aryNews,
                       child: Text('ARY News'),
                     ),
-                    // PopupMenuItem<FilterList>(
-                    //   value: FilterList.independent,
-                    //   child: Text('Independent'),
-                    // ),
-                    // PopupMenuItem<FilterList>(
-                    //   value: FilterList.reuters,
-                    //   child: Text('Reuters'),
-                    // ),
-                    // PopupMenuItem<FilterList>(
-                    //   value: FilterList.cnn,
-                    //   child: Text('CNN'),
-                    // ),
-                    // PopupMenuItem<FilterList>(
-                    //   value: FilterList.alJazeera,
-                    //   child: Text('Al-Jazeera'),
-                    // ),
+                    const PopupMenuItem<FilterList>(
+                      value: FilterList.independent,
+                      child: Text('CBS News'),
+                    ),
+                    const PopupMenuItem<FilterList>(
+                      value: FilterList.reuters,
+                      child: Text('Reuters'),
+                    ),
+                    const PopupMenuItem<FilterList>(
+                      value: FilterList.cnn,
+                      child: Text('CNN'),
+                    ),
+                    const PopupMenuItem<FilterList>(
+                      value: FilterList.alJazeera,
+                      child: Text('Al-Jazeera'),
+                    ),
                   ])
         ],
       ),
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     placeholder: (context, url) => Container(
                                       child: spinkit2,
                                     ),
-                                    errorWidget: (context, url, error) => Icon(
+                                    errorWidget: (context, url, error) => const Icon(
                                       Icons.error_outline,
                                       color: Colors.red,
                                     ),
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Container(
-                                    padding: EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(15),
                                     height: height * 0.22,
                                     alignment: Alignment.bottomCenter,
                                     child: Column(
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Container(
                                           width: width * 0.7,
                                           child: Row(
@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   placeholder: (context, url) => Container(
                                     child: spinkit2,
                                   ),
-                                  errorWidget: (context, url, error) => Icon(
+                                  errorWidget: (context, url, error) => const Icon(
                                     Icons.error_outline,
                                     color: Colors.red,
                                   ),
@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Container(
                                   height: height * 0.18,
                                   // width: width * .3,
-                                  padding: EdgeInsets.only(left: 15),
+                                  padding: const EdgeInsets.only(left: 15),
                                   child: Column(
                                     children: [
                                       Text(snapshot
@@ -292,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
 
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 

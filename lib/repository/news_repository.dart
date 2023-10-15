@@ -9,12 +9,12 @@ class NewsRepository {
     String url =
         'https://newsapi.org/v2/top-headlines?sources=$channelName&apiKey=a5c7243f7e2f43389c4492e4016fc78d';
     final response = await http.get(Uri.parse(url));
-    if (kDebugMode) {
-      print(response.body);
-    }
+    // if (kDebugMode) {
+    //   print(response.body);
+    // }
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      return NewsChannelsHeadlinesModel.fromJson(body);
+        // return NewsChannelsHeadlinesModel.fromJson(body);
     }
     throw Exception('Error');
   }
@@ -23,9 +23,9 @@ class NewsRepository {
     String url =
         'https://newsapi.org/v2/everything?q=$categorey&apiKey=a5c7243f7e2f43389c4492e4016fc78d';
     final response = await http.get(Uri.parse(url));
-    if (kDebugMode) {
-      print(response.body);
-    }
+    // if (kDebugMode) {
+    //   print(response.body);
+    // }
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       return CatagoreyNewsModel.fromJson(body);
