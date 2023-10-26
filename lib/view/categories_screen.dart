@@ -115,7 +115,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     height: height * .18,
                                     width: width * .3,
                                     placeholder: (context, url) => Container(
-                                      child: spinkit2,
+                                        child: spinkit2,
                                     ),
                                     errorWidget: (context, url, error) => Icon(
                                       Icons.error_outline,
